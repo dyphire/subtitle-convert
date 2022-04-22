@@ -29,14 +29,14 @@ class Logger(object):
         pass
 
 def read(path):
-	sys.stdout = Logger("utf8_out.log")
-	sys.stderr = Logger("utf8_err.log")
+	sys.stdout = Logger("subconvert_out.log")
+	sys.stderr = Logger("subconvert_err.log")
 	
 	for root_path,dir_name,file_name in os.walk(path):
 		for file in file_name:
 			ext = file.lower()
-			# 设置要过滤的文件类型
-			if(ext.endswith(".ass") or ext.endswith(".ssa") or ext.endswith(".srt")):
+			# 设置要处理的文件类型
+			if(ext.endswith(".ass") or ext.endswith(".ssa") or ext.endswith(".srt") or ext.endswith(".vtt")):
 				ture_file = os.path.join(root_path,file)
 				print(ture_file)
 				with open(ture_file,'rb') as out_file:
@@ -60,7 +60,7 @@ def read(path):
 						print(" UnicodeDecodeError err%s"%ture_file)
 
 def run():
-    # 从控制台输入文件路径
+    # 从控制台输入文件路径，windows上请使用 "\\" 或 "/" 
     path = input("please input path: ")
     read(path)
 run()

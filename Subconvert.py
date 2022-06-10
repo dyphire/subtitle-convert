@@ -60,7 +60,16 @@ def read(path):
 						print(" UnicodeDecodeError err%s"%ture_file)
 
 def run():
-    # 从控制台输入文件路径，windows上请使用 "\\" 或 "/" 
-    path = input("please input path: ")
-    read(path)
+    if len(sys.argv) != 2:
+        print("请按照以下方式使用：python Subconvert.py path\n注意 'path' 参数为待处理的文件夹路径\n")
+        path = input("请输入路径: ").strip()
+        if not os.path.exists(path):
+            print("输入参数非有效路径")
+        else:
+            read(path)
+    else:
+        if not os.path.exists(sys.argv[1]):
+            print("输入参数非有效路径")
+        else:
+            read(sys.argv[1])
 run()
